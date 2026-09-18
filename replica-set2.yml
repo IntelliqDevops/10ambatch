@@ -2,24 +2,25 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: tomcat-rs
+  name: jenkins-rs
+  namespace: test-ns
   labels:
-    app: appserver
+    app: ci-cd
     author: intelliqit
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: appserver
+      app: ci-cd
   template:
     metadata:
-      name: tomcat-pod
+      name: jenkins-pod
       labels:
-        app: appserver
+        app: ci-cd
     spec:
       containers:
-        - name: mytomcat
-          image: tomee
+        - name: myjenkins
+          image: jenkins/jenkins
           ports:
             - containerPort: 8080
               hostPort: 9090
